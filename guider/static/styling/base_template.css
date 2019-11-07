@@ -1,0 +1,69 @@
+
+
+.nav-container {
+    flex-flow: row nowrap;
+    display: inline-flex;
+    position: relative;
+    flex-grow: 1;
+}
+
+.p-4 {
+  text-align: right;
+  font-weight: 1500;
+  position: relative;
+  bottom: 25px;
+}
+
+.nav-text {
+  font-size: 125%;
+  position: absolute;
+  bottom: 0;
+}
+
+.nav-item {
+  flex-grow: 1;
+}
+
+.left-pad-30 {
+  padding-left: 30px;
+}
+
+.nav-item + .nav-item {
+  margin-left: 2%;
+}
+
+.navbar-toggler + .nav-item {
+  margin-left: 5%;
+}
+
+.navbar-height {
+  height: 75px
+}
+
+.lead {
+  font-weight: bolder !important;
+}
+
+.small-image {
+    width: 1em;
+    height: 1em;
+}
+
+.footer-link {
+    text-decoration: none !important;
+}
+
+.greedy {
+    height: 100%;
+    width: 100%;
+}
+
+
+.btn-lrg-text {
+    font-weight: bold;
+}
+.centered-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

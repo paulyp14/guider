@@ -1,0 +1,5 @@
+1. make cities page responsive
+    a. toggle second address visibility
+
+2. fix resizing issues with navbar, iframe
+3. add about us?

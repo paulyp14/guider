@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {%  block head %}
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="{{url_for('static', filename='js/jquery-3.2.1.js')}}"></script>
+        <script src="{{url_for('static', filename='js/jquery.nicescroll.min.js')}}"></script>
+        <link rel="stylesheet" href="{{url_for('static', filename='styling/base_template.css')}}" type="text/css">
+
+        <title>Guider</title>
+
+    {% endblock %}
+
+</head>
+<body>
+    {% block navbar %}
+        <!-- base template navbar -->
+        <div class="pos-f-t">
+            <nav class="navbar navbar-dark bg-dark navbar-fixed-top">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-fixed-top nav-container navbar-height" id="navbarToggleExternalContent">
+                  <ul class="navbar-nav flex-row mt-2 mt-lg-0 col-xl-9">
+                      <li class="nav-item active col-sm-3">
+                          <a class="nav-link nav-text" href="/">Home<span class="sr-only">(current)</span></a>
+                      </li>
+                      <li class="nav-item col-sm-3">
+                          <a class="nav-link nav-text" href="the_idea">The Idea</a>
+                      </li>
+                      <li class="nav-item col-sm-3">
+                          <a class="nav-link nav-text" href="cities">Cities</a>
+                      </li>
+                      <li class="nav-item col-sm-3">
+                          <a class="nav-link disabled nav-text" href="#" tabindex="-1" aria-disabled="true">About Us</a>
+                      </li>
+                  </ul>
+                  <div class="bg-dark p-4 mt-2 mt-lg-0 col-xl-3">
+                      <h5 class="text-muted h4">Their city.</h5>
+                      <span class="text-white h4">Your adventure.</span>
+                  </div>
+              </div>
+            </nav>
+        </div>
+    {% endblock %}
+
+    {% block content %}
+        <!--
+        ALL TEMPLATES WILL HAVE THESE NAVBAR AND FOOTER ELEMENTS
+        -->
+    {% endblock %}
+    <!-- base template footer -->
+    {% block footer %}
+        <footer class="page-footer font-small bg-dark pt-4">
+            <div class="container-fluid text-center text-md-left">
+                <div class="row">
+                    <div class="col-md-9 mt-md-0 mt-3">
+                        <div class="greedy">
+                            <button type="button" class="btn btn-lrg btn-outline-info centered-image" onclick="location.href='the_idea'"><a class="btn-lrg-text">FIND OUT MORE</a></button>
+                        </div>
+                    </div>
+
+                    <hr class="clearfix w-100 d-md-none pb-3">
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 mb-md-0 mb-3">
+
+                        <!-- Links -->
+                        <h5 class="text-uppercase text-white">Find Us</h5>
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <a class="text-muted footer-link" href="https://www.linkedin.com/in/paul-piggott-a74369171/">
+                                    <img class="small-image" src="{{url_for('static', filename='images/logos/linked_in.png')}}" alt="LinkedIn icon"> LinkedIn</a>
+                            </li>
+                            <li>
+                                <a class="text-muted footer-link" href="http://twitter.com">
+                                    <img class="small-image" src="{{url_for('static', filename='images/logos/twitter_icon.png')}}" alt="Twitter icon"> Twitter
+                                </a>
+                            </li>
+                            <li>
+                                <a class="text-muted footer-link" href="https://github.com/paulyp14/tour_guide_startup">
+                                    <img class="small-image" src="{{url_for('static', filename='images/logos/transparent_github.png')}}" alt="GitHub mark"> GitHub
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3 text-muted">© 2019 Copyright:
+                <a class="text-muted" href="https://github.com/paulyp14"> Paul Piggott</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
+    {% endblock %}
+    <!-- Footer -->
+    <!-- CUSTOM SCROLLBAR -->
+    <script>
+      $ (function (){
+            $("body").niceScroll({
+                background:"rgba(20,20,20,0.3)",
+                scrollspeed: 40,
+            });
+        });
+    </script>
+</body>
+</html>

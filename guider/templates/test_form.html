@@ -1,0 +1,11 @@
+{% from "_formhelpers.html" import render_field %}
+<form action="/cities" method="post">
+    {% for field in form %}
+        {% if field.label.text == "Points of Interest" %}
+            {{ render_field(field, placeholder="Comma separated list of places you want to see") }}
+        {% else %}
+            {{ render_field(field, class="form-control") }}<br>
+        {% endif %}
+    {% endfor %}
+    <button type="submit">Send</button>
+</form>

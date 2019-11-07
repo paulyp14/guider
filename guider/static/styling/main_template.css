@@ -1,0 +1,111 @@
+.main {
+  background-image: url("../../static/images/transit_images/Paris_Curved_river_cropped_large_legend_removed.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+}
+
+.jumbotron {
+  background: transparent;
+  height: 100vh;
+}
+
+.grey-background {
+  background: #cdd1d6;
+  border-radius: 8px;
+}
+
+.jumbotron-content {
+  padding: inherit;
+}
+
+.display-1 {
+  font-weight: bolder;
+}
+
+#proposal {
+  padding: 10%;
+}
+
+.padding-5px {
+  padding: 5px;
+}
+
+
+.spacer {
+  height: 200px;
+  background-color: transparent !important;
+}
+
+.section-title {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.card-container {
+  padding: 5%;
+}
+
+.card {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card-body {
+  width: 85%;
+}
+
+.form-row {
+  padding-left: 0px !important
+}
+
+.zero-margins {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+.pad-align {
+  margin-left: 10px !important;
+}
+
+.fieldset-legend {
+  text-orientation: sideways !important;
+}
+
+.marg-align {
+  margin-left: 15px;
+}
+
+.visibility-toggler {
+  visibility: collapse;
+}
+
+.card-textbox {
+  height: 100px;
+  margin-bottom: 25px;
+}
+
+.maps-frame {
+  overflow: hidden;
+}
+
+.mapouter{
+  position:relative;
+  text-align:right;
+  overflow: hidden;
+  height:500px;
+  width:600px;
+}
+
+.gmap_canvas {
+  overflow:hidden;
+  background:none!important;
+  height:100%;
+  width:100%;
+}
+#gmap_canvas {
+  height: 100%;
+  width:100%;
+  overflow: hidden;
+}

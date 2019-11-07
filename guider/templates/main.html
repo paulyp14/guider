@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static', filename='styling/main_template.css')}}" type="text/css">
+{% endblock %}
+
+{% block content %}
+    <div class="main">
+
+        {% block main_content %}
+
+        {% endblock %}
+
+    </div>
+{% endblock %}
