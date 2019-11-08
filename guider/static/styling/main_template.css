@@ -77,8 +77,8 @@
   margin-left: 15px;
 }
 
-.visibility-toggler {
-  visibility: collapse;
+#optional-destination {
+  visibility: hidden;
 }
 
 .card-textbox {
