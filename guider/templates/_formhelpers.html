@@ -8,3 +8,27 @@
         </ul>
     {% endif %}
 {% endmacro %}
+
+{% macro render_radios(field) %}
+    <fieldset class="form-group" id="{{ field.id }}">
+        <div class="row">
+            <legend class="col-form-label pt-0 marg-align">{{field.label.text}}</legend>
+        </div>
+        <div class="row">
+            <div class="col-sm-10">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="{{ field.name }}" id="mode-0" value="{{ field.choices[0][0] }}" checked>
+                    <label class="form-check-label" for="mode-0">
+                        {{ field.choices[0][1] }}
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="{{ field.name }}" id="mode-1" value="{{ field.choices[1][0] }}">
+                    <label class="form-check-label" for="mode-1">
+                        {{ field.choices[1][1] }}
+                    </label>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+{% endmacro %}

@@ -1,4 +1,5 @@
 {% extends "main.html" %}
+{% from "_formhelpers.html" import render_field, render_radios %}
 
 {% block main_content %}
 
@@ -31,19 +32,19 @@
                                     <h6>ADDRESS</h6>
                                     <div class="row">
                                         <div class="col-7">
-                                            <input type="text" class="form-control" placeholder="Street Address">
+                                            {{ render_field(form.address, class="form-control", placeholder="Street Address") }}
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-row pad-align">
                                             <div class="col-7">
-                                                <input type="text" class="form-control" placeholder="City">
+                                                {{ render_field(form.city, class="form-control", placeholder="City") }}
                                             </div>
                                             <div class="col">
-                                                <input type="text" class="form-control" placeholder="State">
+                                                {{ render_field(form.state, class="form-control", placeholder="State") }}
                                             </div>
                                             <div class="col">
-                                                <input type="text" class="form-control" placeholder="Zip">
+                                                {{ render_field(form.zip, class="form-control", placeholder="Zip") }}
                                             </div>
                                         </div>
                                     </div>
@@ -77,36 +78,21 @@
                                         </div>
                                     </div>
                                 </div>
-                                <fieldset class="form-group">
-                                    <div class="row">
-                                        <legend class="col-form-label pt-0 marg-align">Route mode</legend>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-10">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1">
-                                                <label class="form-check-label" for="gridRadios1">
-                                                    Point to Point
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2" checked>
-                                                <label class="form-check-label" for="gridRadios2">
-                                                    Loop
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
+
+                                {{ render_radios(form.mode) }}
+
                                 <div class="row">
                                     <div class="col-form-label marg-align">Points Of Interest</div>
                                 </div>
                                 <div class="row">
-                                    <textarea placeholder="Comma separated list of places you want to see on your tour" class="col-lg-12 marg-align card-textbox" form="csl" id="csl"></textarea>
+                                    {{ render_field(form.dests, placeholder="Comma separated list of places you want to see on your tour", class="col-lg-12 marg-align card-textbox") }} <!-- <textarea   form="csl" id="csl"></textarea> -->
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-2">
                                         <button type="submit" class="btn btn-primary">Go!</button>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="reset" class="btn btn-primary">Clear</button>
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +120,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="card-link">Another link</a>
+                        <a href="{{ route }}" class="card-link" target="{{ target }}">Your route</a>
                     </div>
                 </div>
             </div>

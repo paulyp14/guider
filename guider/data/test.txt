@@ -1,0 +1,27 @@
+Address given:
+  meta: <wtforms.form.Meta object at 0x000001C8539966A0>
+  _prefix: 
+  _errors: None
+  _fields: OrderedDict([('address', <wtforms.fields.core.StringField object at 0x000001C8539964A8>), ('city', <wtforms.fields.core.StringField object at 0x000001C8539965C0>), ('state', <wtforms.fields.core.StringField object at 0x000001C853996860>), ('zip', <wtforms.fields.core.StringField object at 0x000001C853996BE0>), ('mode', <wtforms.fields.core.RadioField object at 0x000001C853996A90>), ('dests', <wtforms.fields.simple.TextAreaField object at 0x000001C853996C18>), ('csrf_token', <wtforms.csrf.core.CSRFTokenField object at 0x000001C853996828>)])
+  _csrf: <flask_wtf.csrf._FlaskFormCSRF object at 0x000001C853996048>
+  address: <input id="address" name="address" required type="text" value="2068 Rue de Bedford">
+  city: <input id="city" name="city" type="text" value="Saint Bruno">
+  state: <input id="state" name="state" type="text" value="QC">
+  zip: <input id="zip" name="zip" required type="text" value="J3V4A8">
+  mode: <ul id="mode"><li><input checked id="mode-0" name="mode" type="radio" value="one_way"> <label for="mode-0">One Way</label></li><li><input id="mode-1" name="mode" type="radio" value="round_trip"> <label for="mode-1">Round Trip</label></li></ul>
+  dests: <textarea id="dests" name="dests" required>4384018714</textarea>
+  csrf_token: <input id="csrf_token" name="csrf_token" type="hidden" value="ImFjMzcxZWRiMzYyMzc1NDZlNDhhMmY5MzNkNDhlOTRlYmVkZjkxOTIi.XcO1XA.uDNVlc79e4tn5HzHAy9GY2izhfI">
+  Address given:
+  meta: <wtforms.form.Meta object at 0x000001C8539966A0>
+  _prefix: 
+  _errors: None
+  _fields: OrderedDict([('address', <wtforms.fields.core.StringField object at 0x000001C853996A58>), ('city', <wtforms.fields.core.StringField object at 0x000001C853996C50>), ('state', <wtforms.fields.core.StringField object at 0x000001C8539966D8>), ('zip', <wtforms.fields.core.StringField object at 0x000001C853996588>), ('mode', <wtforms.fields.core.RadioField object at 0x000001C853996518>), ('dests', <wtforms.fields.simple.TextAreaField object at 0x000001C8539968D0>), ('csrf_token', <wtforms.csrf.core.CSRFTokenField object at 0x000001C853996E80>)])
+  _csrf: <flask_wtf.csrf._FlaskFormCSRF object at 0x000001C853996748>
+  address: <input id="address" name="address" required type="text" value="4700 av Bourret, 300">
+  city: <input id="city" name="city" type="text" value="Montreal">
+  state: <input id="state" name="state" type="text" value="Quebec">
+  zip: <input id="zip" name="zip" required type="text" value="H3W 1K8">
+  mode: <ul id="mode"><li><input checked id="mode-0" name="mode" type="radio" value="one_way"> <label for="mode-0">One Way</label></li><li><input id="mode-1" name="mode" type="radio" value="round_trip"> <label for="mode-1">Round Trip</label></li></ul>
+  dests: <textarea id="dests" name="dests" required>4384018714</textarea>
+  csrf_token: <input id="csrf_token" name="csrf_token" type="hidden" value="ImFjMzcxZWRiMzYyMzc1NDZlNDhhMmY5MzNkNDhlOTRlYmVkZjkxOTIi.XcO1dA.MI0HphV-z8HLX-S-XnSAgN_4nTA">
+  
