@@ -142,10 +142,10 @@
         }
     </script>
     <script>
-        {#function dropdownResponse() {#}
-        {#    var sel = document.getElementById("city-selector");#}
-
-        {#document.getElementById("#city-selector").addEventListener("click", dropdownResponse);#}
+        // adds responsive to the dropright
+        // changes new selection to be on the front
+        // moves old selection back into the dropright
+        // changes the embedded map based on the selection
         $(document).ready(function(){
             $("#city-selections a").click(function(){
                var selection = $(this).text();
