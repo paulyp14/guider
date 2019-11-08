@@ -14,16 +14,16 @@
                                 <h6 class="card-subtitle mb-2 text-muted">Plan a tour</h6>
                                 <!-- Default dropright button -->
                                 <div class="btn-group dropright">
-                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button type="button" id="selected-city" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Paris
                                     </button>
-                                    <div class="dropdown-menu">
+                                    <div class="dropdown-menu" id="city-selections">
                                         <!-- Dropdown menu links -->
                                         <a class="dropdown-item" href="#">New York City</a>
                                         <a class="dropdown-item" href="#">London</a>
                                         <a class="dropdown-item" href="#">Montreal</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">More cities coming soon. . .</a>
+                                        <a class="dropdown-item disabled" href="#">More cities coming soon. . .</a>
                                     </div>
                                 </div>
 
@@ -58,7 +58,7 @@
                                 </div>
                                 -->
                                 <div class="form-group" id="optional-destination">
-                                    <h6>ADDRESS</h6>
+                                    <h6>DESTINATION</h6>
                                     <div class="row">
                                         <div class="col-7">
                                             {{ render_field(form.dest_address, class="form-control", placeholder="Street Address") }}
@@ -131,13 +131,40 @@
 
 {% block additional_scripts %}
     <script>
+        // toggles destination form on and off
         document.getElementById("mode").onclick = function() {
             var selection = document.querySelector('input[name="mode"]:checked').value;
-            if (selection == "round_trip") {
+            if (selection === "round_trip") {
                 document.getElementById("optional-destination").style.visibility = "visible";
             } else {
                 document.getElementById("optional-destination").style.visibility = "hidden";
             }
         }
+    </script>
+    <script>
+        {#function dropdownResponse() {#}
+        {#    var sel = document.getElementById("city-selector");#}
+
+        {#document.getElementById("#city-selector").addEventListener("click", dropdownResponse);#}
+        $(document).ready(function(){
+            $("#city-selections a").click(function(){
+               var selection = $(this).text();
+               $(this).text(document.getElementById("selected-city").innerHTML);
+               document.getElementById("selected-city").innerHTML = selection;
+               var imap = document.getElementById("gmap_canvas")
+               if (selection === "New York City"){
+                   imap.src="https://maps.google.com/maps?q=new%20york%20city&t=&z=13&ie=UTF8&iwloc=&output=embed";
+               }
+               else if (selection === "Paris"){
+                    imap.src="https://maps.google.com/maps?q=paris&t=&z=13&ie=UTF8&iwloc=&output=embed";
+               }
+               else if (selection === "London"){
+                    imap.src="https://maps.google.com/maps?q=london%20england&t=&z=13&ie=UTF8&iwloc=&output=embed";
+               }
+               else if (selection === "Montreal"){
+                    imap.src="https://maps.google.com/maps?q=montreal&t=&z=13&ie=UTF8&iwloc=&output=embed";
+               }
+            });
+        });
     </script>
 {% endblock %}

@@ -3,7 +3,7 @@ from flask import render_template, request
 from datetime import datetime
 import os
 
-maps_api_key = 'AIzaSyDYmAgxT5f66r8Tt-HR3MoF7mrSS5fFkKY'
+maps_api_key = ''
 
 import forms
 
