@@ -3,6 +3,9 @@
 <head>
     {%  block head %}
         <!-- Required meta tags -->
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="0" />
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Bootstrap CSS -->
@@ -31,17 +34,20 @@
               </button>
               <div class="collapse navbar-fixed-top nav-container navbar-height" id="navbarToggleExternalContent">
                   <ul class="navbar-nav flex-row mt-2 mt-lg-0 col-xl-9">
-                      <li class="nav-item active col-sm-3">
-                          <a class="nav-link nav-text" href="/">Home<span class="sr-only">(current)</span></a>
+                      <li class="nav-item {{ 'active' if active_page == 'home' else '' }} col-sm-2">
+                          <a class="nav-link nav-text" href="{{ url_for('home') }}">Home<span class="sr-only">(current)</span></a>
                       </li>
-                      <li class="nav-item col-sm-3">
-                          <a class="nav-link nav-text" href="the_idea">The Idea</a>
+                      <li class="nav-item {{ 'active' if active_page == 'the_idea' else '' }} col-sm-2">
+                          <a class="nav-link nav-text" href="{{ url_for('the_idea') }}">The Idea</a>
                       </li>
-                      <li class="nav-item col-sm-3">
-                          <a class="nav-link nav-text" href="cities">Cities</a>
+                      <li class="nav-item {{ 'active' if active_page == 'cities' else '' }} col-sm-2">
+                          <a class="nav-link nav-text" href="{{ url_for('cities') }}">Cities</a>
                       </li>
-                      <li class="nav-item col-sm-3">
-                          <a class="nav-link disabled nav-text" href="#" tabindex="-1" aria-disabled="true">About Us</a>
+                      <li class="nav-item {{ 'active' if active_page == 'about_us' else '' }} col-sm-2">
+                          <a class="nav-link nav-text" href="{{ url_for('about_us') }}" >About Us</a>
+                      </li>
+                      <li class="nav-item {{ 'active' if active_page == 'join_us' else '' }} col-sm-2">
+                          <a class="nav-link nav-text disabled" href="" >Join Us</a>
                       </li>
                   </ul>
                   <div class="bg-dark p-4 mt-2 mt-lg-0 col-xl-3">

@@ -1,0 +1,28 @@
+#rendered-head {
+    text-align: center;
+}
+
+div.code-outer {
+    font-family: Menlo, monospace;
+    padding: 40px !important;
+}
+
+div.border-gold {
+    border: 2px solid rgb(112,128,144);
+    border-radius: 3px;
+}
+div#code-inner {
+    margin: 2px;
+    padding-left: 40px !important;
+}
+
+div#gutter {
+    position: relative;
+    left: -40px;
+    width: 40px !important;
+    margin: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-right: 2px solid rgb(112, 128, 144);
+    text-align: right;
+}

@@ -1,0 +1,25 @@
+{% extends "main.html" %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static', filename='styling/msim_rendered.css')}}" type="text/css">
+{% endblock %}
+{% block main_content %}
+    <div id="proposal">
+        <div class="grey-background code-outer">
+            <h1 id="rendered-head">Rendered Marie Simulator Code</h1>
+            <br>
+            <div class="border-gold row" id="code-inner">
+                <div id="gutter">
+                    {% for line in rendered_lines %}
+                        {{ line|safe }}<br>
+                    {% endfor %}
+                </div>
+                <div class="col">
+                    {% for line in rendered_code %}
+                        {{ line|safe }}<br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

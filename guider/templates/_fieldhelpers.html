@@ -1,4 +1,6 @@
 {% macro render_field(field) %}
+    {# rendering of fields #}
+    {# associates the HTML/bootstrap form fields i already had for assignment 2 with corresponding flask form CitiesForm #}
     {{ field(**kwargs)|safe }}
     {% if field.errors %}
         <ul class="errors">
@@ -10,6 +12,7 @@
 {% endmacro %}
 
 {% macro render_radios(field) %}
+    {# renders the radio field i had created for assignment 2 and associates it with corresponding flask CitiesForm #}
     <fieldset class="form-group" id="{{ field.id }}">
         <div class="row">
             <legend class="col-form-label pt-0 marg-align">{{field.label.text}}</legend>
@@ -17,13 +20,13 @@
         <div class="row">
             <div class="col-sm-10">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="{{ field.name }}" id="mode-0" value="{{ field.choices[0][0] }}" checked>
+                    <input class="form-check-input" type="radio" name="{{ field.name }}" id="mode-0" value="{{ field.choices[0][0] }}">
                     <label class="form-check-label" for="mode-0">
                         {{ field.choices[0][1] }}
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="{{ field.name }}" id="mode-1" value="{{ field.choices[1][0] }}">
+                    <input class="form-check-input" type="radio" name="{{ field.name }}" id="mode-1" value="{{ field.choices[1][0] }}" checked>
                     <label class="form-check-label" for="mode-1">
                         {{ field.choices[1][1] }}
                     </label>
@@ -31,4 +34,17 @@
             </div>
         </div>
     </fieldset>
+{% endmacro %}
+
+{% macro render_trigger(name) %}
+    {# controls triggering of handle_route #}
+    {% if name == "load_trigger" %}
+        {# if the form has been submitted, this will trigger the building of the route #}
+        <script src="{{ url_for('static', filename='js/load_trigger.js') }}"></script>
+    {% else %}
+        {# form was not submitted, don't trigger #}
+        <script>
+            console.log("Load_trigger not loaded")
+        </script>
+    {% endif %}
 {% endmacro %}

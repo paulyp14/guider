@@ -1,0 +1,27 @@
+{% extends "main.html" %}
+{% from "_fieldhelpers.html" import render_field %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static', filename='styling/msim_rendered.css')}}" type="text/css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+{% endblock %}
+{% block main_content %}
+    <div id="proposal">
+        <div class="grey-background code-outer">
+            <h1 id="rendered-head">Marie Simulator Code Beautifier</h1>
+            <br>
+            <br>
+            <form action="/about_us/render_marie" method="post">
+                {{ form.csrf_token }}
+                <h3>{{ form.code.label }}</h3>
+                {{ render_field(form.code, class="form-control", rows="5", placeholder='Type Marie Simulator Code Here', width="100%", height="200px") }} <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+{% block additional_scripts %}
+    <script src=" {{ url_for('static', filename='js/scroll_bar_resizer.js') }}"></script>
+{% endblock %}
