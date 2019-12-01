@@ -1,9 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, RadioField, TextAreaField, SubmitField
-from wtforms.validators import InputRequired
+from wtforms import StringField, RadioField, TextAreaField, PasswordField
+from wtforms.validators import InputRequired, Email
 
-from python_src.custom_validators import ValidateOneWayAddress, WaypointValidator
+from python_src.custom_validators import *
 
+from python_src.db_utils import utilities as dbu
 
 class CitiesForm(FlaskForm):
 
@@ -64,3 +65,66 @@ def url_appropriate(s):
 
 class MarieSimCode(FlaskForm):
     code = TextAreaField('MarieCode', validators=[InputRequired()])
+
+
+class SignUpForm(FlaskForm):
+
+    name = StringField('name', validators=[InputRequired()])
+    email = StringField('email', validators=[InputRequired(), Email()])
+    password = PasswordField('password', validators=[InputRequired()])
+    confirm = PasswordField('confirm', validators=[InputRequired(), ConfirmPasswordValidator()])
+    role = RadioField('number_people', choices=[('2', 'number_people_2'), ('4', 'number_people_4'), ( '6', 'number_people_6'), ('8', 'number_people_8')])
+
+    def set_empty_string(self):
+        """
+        Sets the data to be empty strings so that the form renders properly
+        """
+        self.name.data = ''
+        self.email.data = ''
+        self.password.data = ''
+        self.confirm.data = ''
+
+    def transform(self):
+        """
+        Transforms the input of the radio field to corresponding value
+        """
+        if self.role.data == '2':
+            r = 'Apply'
+        elif self.role.data == '4':
+            r = 'Donate'
+        elif self.role.data == '6':
+            r = 'Follow'
+        else:
+            r = 'Create'
+        self.role.data = r
+
+    def insert(self):
+        """
+        Submits form data to the database
+        """
+        sql = '''INSERT INTO users (name, email, password, role)
+                             VALUES ('{name}', '{email}', '{password}', '{role}')'''
+        sql = sql.format(name=self.name.data,
+                         email=self.email.data,
+                         password=self.password.data,
+                         role=self.role.data)
+        dbu.insert(sql)
+
+    def __str__(self):
+        return '\n  '.join(['Input:', *[f'{k}: {v}' for k, v in self.__dict__.items()], ''])
+
+
+class SignInForm(FlaskForm):
+
+    user_id = StringField('name', validators=[InputRequired()])
+    password = PasswordField('password', validators=[InputRequired(), ValidPassword()])
+
+    def set_empty_string(self):
+        """
+        Sets the data to be empty strings so that the form renders properly
+        """
+        self.user_id.data = ''
+        self.password.data = ''
+
+    def __str__(self):
+        return '\n  '.join(['Input:', *[f'{k}: {v}' for k, v in self.__dict__.items()], ''])

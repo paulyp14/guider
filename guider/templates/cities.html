@@ -8,7 +8,7 @@
             <div class="col-lg-6">
                 <div class="card grey-background">
                     <div class="card-body">
-                        <form action="/cities" method=post>
+                        <form action="{{ url_for('cities') }}" method=post>
                             {{ form.csrf_token }}
                             <div class="container-fluid">
                                 <h5 class="card-title">Tour Builder</h5>
