@@ -150,3 +150,12 @@
   background: black;
   opacity: .5;
 }
+
+.alert-error {
+  background-color: #f2dede;
+  border-color: #eed3d7;
+  color: #b94a48;
+  padding-right: 4px;
+  padding-bottom: 4px;
+  padding-top: 2px;
+}

@@ -1,6 +1,12 @@
-1. make cities page responsive
-    a. toggle second address visibility
+1. submit sign up -- DONE_ISH
+2. login abilities
+3. load info about users -- table shows name, email, role --- click on name - shows route search history!!!
+4. beautify about us
+5.
 
-2. fix resizing issues with navbar, iframe
-3. add about us?
-4. maybe the 'more cities coming soon. . . .' dropdown could lead to a page called expansion? funding? help-us-get-off-the-ground????
+ISSUES
+resizing navbar, iframe, with window resize events!
+white circles not properly loaded always
+
+COULD CHANGE THE STORE OF ROUTES, THE STORE OF MARIE CODE TO BE DONE IN DB
+

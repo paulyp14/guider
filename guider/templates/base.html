@@ -47,7 +47,7 @@
                           <a class="nav-link nav-text" href="{{ url_for('about_us') }}" >About Us</a>
                       </li>
                       <li class="nav-item {{ 'active' if active_page == 'join_us' else '' }} col-sm-2">
-                          <a class="nav-link nav-text disabled" href="" >Join Us</a>
+                          <a class="nav-link nav-text" href="{{ url_for('sign_up') }}" >Join Us</a>
                       </li>
                   </ul>
                   <div class="bg-dark p-4 mt-2 mt-lg-0 col-xl-3">
@@ -70,8 +70,15 @@
             <div class="container-fluid text-center text-md-left">
                 <div class="row">
                     <div class="col-md-9 mt-md-0 mt-3">
-                        <div class="greedy">
-                            <button type="button" class="btn btn-lrg btn-outline-info centered-image" onclick="location.href='the_idea'"><a class="btn-lrg-text">FIND OUT MORE</a></button>
+                        <div class="row" style="padding-bottom:10px" >
+                            <div class="greedy">
+                                <button type="button" class="btn btn-lrg btn-outline-info centered-image" onclick="location.href='the_idea'"><a class="btn-lrg-text">FIND OUT MORE</a></button>
+                            </div>
+                        </div>
+                            <div class="row" style="padding-top:10px">
+                            <div class="greedy">
+                                <button type="button" class="btn btn-lrg btn-outline-info centered-image" onclick="location.href='sign_in'"><a class="btn-lrg-text">SIGN IN</a></button>
+                            </div>
                         </div>
                     </div>
 

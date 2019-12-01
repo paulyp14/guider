@@ -48,3 +48,50 @@
         </script>
     {% endif %}
 {% endmacro %}
+
+{% macro signup_textfield(field, text) %}
+    <div class="form-group form-input">
+        <input type="text" name="{{ field.id }}" id="{{ field.id }}" value="{{ field.data }}" placeholder="" required/>
+        <label for="{{ field.id }}" class="form-label">{{ text }}</label>
+        {% if field.errors %}
+            {% for error in field.errors %}
+                <span class="alert-error">{{ error }}</span>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endmacro %}
+{% macro signup_passfield(field, text) %}
+    <div class="form-group form-input">
+        <input type="password" name="{{ field.id }}" id="{{ field.id }}" value="{{ field.data }}" placeholder="" required/>
+        <label for="{{ field.id }}" class="form-label">{{ text }}</label>
+        {% if field.errors %}
+            {% for error in field.errors %}
+                <span class="alert-error">{{ error }}</span>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endmacro %}
+
+{% macro signup_radios(field) %}
+    <div class="form-radio">
+        <label class="label-radio"> Select the role you envision for yourself</label>
+        <div class="radio-item-list">
+            <span class="radio-item" id="apply-span">
+                <input type="radio" name="{{ field.name }}" value="{{ field.choices[0][0] }}" id="{{ field.choices[0][1] }}" />
+                <label for="{{ field.choices[0][1] }}">A</label>
+            </span>
+            <span class="radio-item active" id="donate-span">
+                <input type="radio" name="{{ field.name }}" value="{{ field.choices[1][0] }}" id="{{ field.choices[1][1] }}" checked="checked" />
+                <label for="{{ field.choices[1][1] }}">D</label>
+            </span>
+            <span class="radio-item" id="follow-span">
+                <input type="radio" name="{{ field.name }}" value="{{ field.choices[2][0] }}" id="{{ field.choices[2][1] }}" />
+                <label for="{{ field.choices[2][1] }}">F</label>
+            </span>
+            <span class="radio-item" id="create-span">
+                <input type="radio" name="{{ field.name }}" value="{{ field.choices[3][0] }}" id="{{ field.choices[3][1] }}" />
+                <label for="{{ field.choices[3][1] }}">C</label>
+            </span>
+        </div>
+    </div>
+{% endmacro %}
