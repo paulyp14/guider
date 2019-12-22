@@ -1,0 +1,115 @@
+{% extends "main.html" %}
+
+{% block main_content %}
+    <div class="flex-container" id="signin-container-fluid">
+        <div class="grey-background padding-5px supporter-body">
+            <h1 class="section-title">Our supporters</h1>
+            <div class="input-group mb-3">
+                <input id="search-bar" type="text" class="form-control" placeholder="Search supporters. Hit enter to see all supporters." aria-label="Search supporters. Hit enter to see all supporters." aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button id="search-btn" class="btn btn-outline-secondary" type="button">Search</button>
+                </div>
+            </div>
+            <section class="content">
+                <div id="tdiv">
+
+                </div>
+            </section>
+        </div>
+    </div>
+{% endblock %}
+
+{% block additional_scripts %}
+    <script>
+
+        var sb = document.getElementById('search-bar');
+        var sbtn = document.getElementById('search-btn');
+
+        sb.addEventListener("keyup", function(event) {
+            // Number 13 is the "Enter" key on the keyboard
+            if (event.keyCode === 13) {
+                // Cancel the default action, if needed
+                doSearch();
+            }
+        });
+
+        sbtn.addEventListener('click', function() {
+            doSearch();
+        });
+
+        function makeTable(array){
+
+            // get the div where the table is going to go and remove table if there
+            var tdiv = document.getElementById('tdiv');
+            tdiv.removeChild(tdiv.childNodes[0]);
+            // create the table elements
+            var results = document.createElement('table');
+            results.className = "table table-dark";
+            var tbdy = document.createElement('tbody');
+            var thead = document.createElement('thead');
+            // loop through the response to populate the table elements
+            for(var i = 0; i < array.length; i++){
+                var row = document.createElement('tr');
+                for(var j = 0; j < array[i].length; j++){
+                    var c;
+                    if (i === 0) {
+                        var c = document.createElement('th');
+                        c.setAttribute('scope', 'col');
+                    }
+                    else {
+                        var c = document.createElement('td');
+
+                        if (j === 0){
+                            c.setAttribute('scope', 'row');
+                        }
+                    }
+                    // this is where making a link on the emails to display searches would go
+                    c.innerHTML = array[i][j];
+                    row.appendChild(c);
+                }
+                if (i === 0){
+                    thead.appendChild(row);
+                }
+                else {
+                    tbdy.appendChild(row)
+                }
+            }
+            // add the head and body to the table
+            results.appendChild(thead);
+            results.appendChild(tbdy);
+            // add the table to the div
+            tdiv.appendChild(results);
+            // resize the container
+            var sic = $('#signin-container-fluid');
+            var h = sic.height();
+            var newHeight = h / .8;
+            var marg = (newHeight * .2) /2;
+
+            // add padding so the container is not touching the navbar or footer
+            sic.css('padding-top', marg + 'px');
+            sic.css('padding-bottom', marg + 'px');
+
+            // resize the scroll bar
+            $('body').getNiceScroll().resize();
+        }
+
+        function doSearch(){
+            // does the search
+            // right now the search is just a query of all people in teh database
+            // get the xhttp ready
+            var xhttp = new XMLHttpRequest();
+            // define what to do when request received
+            xhttp.onreadystatechange = function() {
+                // if response is good
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log('onreadystatechange xhttp request completed');
+                    // make the table
+                    makeTable(JSON.parse(this.response));
+                }
+            };
+            // make the request
+            xhttp.open('GET', '/get_supporter_table_contents', true);
+            xhttp.send();
+        }
+    </script>
+{% endblock %}

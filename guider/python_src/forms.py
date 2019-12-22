@@ -1,13 +1,16 @@
+import sqlite3
 from flask_wtf import FlaskForm
-from wtforms import StringField, RadioField, TextAreaField, PasswordField
 from wtforms.validators import InputRequired, Email
+from wtforms import StringField, RadioField, TextAreaField, PasswordField
 
 from python_src.custom_validators import *
-
 from python_src.db_utils import utilities as dbu
 
-class CitiesForm(FlaskForm):
 
+class CitiesForm(FlaskForm):
+    """
+    CitiesForm class that takes input on /cities page
+    """
     address = StringField(label='Street Address', validators=[InputRequired()])
     city = StringField(label='City')
     state = StringField(label='State')
@@ -18,12 +21,6 @@ class CitiesForm(FlaskForm):
     dest_city = StringField(label='City')
     dest_state = StringField(label='State')
     dest_zip = StringField(label='Zip', validators=[ValidateOneWayAddress()])
-
-    # def validate_dest_address(form, field):
-    #     print('Validating destination address')
-    #     if form.mode.data == 'one_way':
-    #         if field.data is None:
-    #             raise ValidationError('You have selected a one way route. You must indicate your final destination.')
 
     def __str__(self):
         return '\n  '.join(['Address given:', *[f'{k}: {v}' for k, v in self.__dict__.items()], ''])
@@ -40,7 +37,6 @@ class CitiesForm(FlaskForm):
         return f"{dir_base}{'&'.join([f() for f in builders])}"
 
     def get_origin(self, type_str='origin'):
-        # "City Hall, New York, NY" should be converted to City+Hall%2C+New+York%2C+NY
         return f'{type_str}={self.format_address("address", "city", "state", "zip")}'
 
     def origin_as_destination(self):
@@ -53,14 +49,14 @@ class CitiesForm(FlaskForm):
         return '%2C'.join([url_appropriate(v) for k, v in self.data.items() if k in args and v is not None and v is not ''])
 
     def get_waypoints(self):
-        return f'waypoints={"%7C".join([url_appropriate(s) for s in self.data["dests"].split(" -- ")])}'
+        return f'waypoints={"|".join([url_appropriate(s) for s in self.data["dests"].split(" -- ")])}'
 
     def get_travelmode(self):
         return 'travelmode=walking'
 
 
 def url_appropriate(s):
-    return s.replace(' ', '+')
+    return s.replace(', ', '%2C').replace(',', '%2C').replace(' ', '+')
 
 
 class MarieSimCode(FlaskForm):
@@ -108,7 +104,11 @@ class SignUpForm(FlaskForm):
                          email=self.email.data,
                          password=self.password.data,
                          role=self.role.data)
-        dbu.insert(sql)
+        try:
+            dbu.insert(sql)
+            return None
+        except sqlite3.IntegrityError:
+            return f'Email {self.email.data} already taken'
 
     def __str__(self):
         return '\n  '.join(['Input:', *[f'{k}: {v}' for k, v in self.__dict__.items()], ''])
@@ -125,6 +125,9 @@ class SignInForm(FlaskForm):
         """
         self.user_id.data = ''
         self.password.data = ''
+
+    def get_user(self):
+        return self.user_id.data
 
     def __str__(self):
         return '\n  '.join(['Input:', *[f'{k}: {v}' for k, v in self.__dict__.items()], ''])

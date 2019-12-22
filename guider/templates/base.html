@@ -32,8 +32,8 @@
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
               </button>
-              <div class="collapse navbar-fixed-top nav-container navbar-height" id="navbarToggleExternalContent">
-                  <ul class="navbar-nav flex-row mt-2 mt-lg-0 col-xl-9">
+              <div class="collapse navbar-fixed-top nav-container navbar-height-short" id="navbarToggleExternalContent">
+                  <ul class="navbar-nav flex-row mt-2 mt-lg-0 col-xl-9" id="nav-menu">
                       <li class="nav-item {{ 'active' if active_page == 'home' else '' }} col-sm-2">
                           <a class="nav-link nav-text" href="{{ url_for('home') }}">Home<span class="sr-only">(current)</span></a>
                       </li>
@@ -70,14 +70,23 @@
             <div class="container-fluid text-center text-md-left">
                 <div class="row">
                     <div class="col-md-9 mt-md-0 mt-3">
-                        <div class="row" style="padding-bottom:10px" >
+                        <div class="row" id="top-btn">
                             <div class="greedy">
-                                <button type="button" class="btn btn-lrg btn-outline-info centered-image" onclick="location.href='the_idea'"><a class="btn-lrg-text">FIND OUT MORE</a></button>
+                                <form action="{{ url_for('the_idea') }}">
+                                    <button type="submit" class="btn btn-lrg btn-outline-info centered-image"><a class="btn-lrg-text">FIND OUT MORE</a></button>
+                                </form>
                             </div>
                         </div>
-                            <div class="row" style="padding-top:10px">
+                        <div class="row" id="middle-btn">
                             <div class="greedy">
-                                <button type="button" class="btn btn-lrg btn-outline-info centered-image" onclick="location.href='sign_in'"><a class="btn-lrg-text">SIGN IN</a></button>
+                                <form action="{% if current_user.is_authenticated %}{{ url_for('logout') }}{% else %}{{ url_for('sign_in') }}{% endif %}">
+                                    <button type="submit" class="btn btn-lrg btn-outline-info centered-image"><a class="btn-lrg-text">{% if current_user.is_authenticated %}SIGN OUT{% else %}SIGN IN{% endif %}</a></button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row" id="bottom-btn">
+                            <div class="greedy">
+                                <span class="user-info">Current User: {{ current_user.username }}</span>
                             </div>
                         </div>
                     </div>
@@ -101,7 +110,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="text-muted footer-link" href="https://github.com/paulyp14/tour_guide_startup">
+                                <a class="text-muted footer-link" href="https://github.com/paulyp14/guider">
                                     <img class="small-image" src="{{url_for('static', filename='images/logos/transparent_github.png')}}" alt="GitHub mark"> GitHub
                                 </a>
                             </li>
@@ -119,11 +128,45 @@
     <!-- Footer -->
     <!-- CUSTOM SCROLLBAR -->
     <script>
-      $ (function (){
+        $ (function (){
             $("body").niceScroll({
                 background:"rgba(20,20,20,0.3)",
                 scrollspeed: 40,
             });
+        });
+
+        $(window).resize(function(){
+            var w = $(window).width();
+            var navW = $('#nav-menu');
+            var nav = $('#navbarToggleExternalContent');
+            var classes = navW.attr('class');
+            console.log(classes);
+            console.log(w);
+
+            if (w >= 700){
+                console.log('Big enough for flex-row');
+                if (!classes.includes('flex-row')){
+                    console.log('Adding flex-row and navbar-height');
+                    navW.addClass('flex-row');
+                    nav.removeClass('navbar-height-tall');
+                    nav.addClass('navbar-height-short');
+                }
+                else {
+                    console.log('Flex-row already present');
+                }
+            }
+            else {
+                console.log('Too small for flex-row');
+                if (classes.includes('flex-row')){
+                    console.log('Removing flex-row and navbar-height');
+                    navW.removeClass('flex-row');
+                    nav.removeClass('navbar-height-short');
+                    nav.addClass('navbar-height-tall');
+                }
+                else{
+                    console.log('Flex-row not present');
+                }
+            }
         });
     </script>
     {% block additional_scripts %}

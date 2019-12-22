@@ -4,6 +4,11 @@ from python_src.db_utils import utilities as dbu
 
 class ValidateOneWayAddress(object):
     def __init__(self, message=None):
+        """
+        Validator for forcing one way route to have final destination
+
+        :param message:
+        """
         if not message:
             message = 'You have selected a one way route. You must indicate your final destination.'
         self.message = message
@@ -17,6 +22,11 @@ class ValidateOneWayAddress(object):
 
 class WaypointValidator(object):
     def __init__(self, message=None):
+        """
+        Validator for forcing one way route to have waypoints
+
+        :param message:
+        """
         if not message:
             message = 'You have not selected a one way route. Waypoints required.'
         self.message = message
@@ -28,7 +38,13 @@ class WaypointValidator(object):
 
 
 class ConfirmPasswordValidator(object):
+
     def __init__(self, message=None):
+        """
+        Validation class for user email/confirmation email
+
+        :param message: the message to display
+        """
         if not message:
             message = 'The password and confirmed password do not match'
         self.message = message
@@ -61,12 +77,10 @@ class ValidUser(object):
         try:
             # try the input as an email
             Email().__call__(form, field)
-            col = 'email'
         except ValidationError:
-            # not an email
-            col = 'name'
+            raise ValidationError('You must input an email')
         # check db for input
-        res = dbu.fetch("select {c}, password from users where {c} = '{f}'".format(c=col, f=field.data))
+        res = dbu.fetch("select email, password from users where email = '{f}'".format(f=field.data))
         if len(res) == 0:
             # input not found
             raise ValidationError(self.message)

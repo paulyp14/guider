@@ -99,25 +99,21 @@
 
             </div>
             <div class="col">
-                <div class="card grey-background flex-fill" >
+                <div class="card grey-background flex-fill" id="map-card">
                     <div class="card-body">
                         <h5 class="card-title">Your tour</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Google maps. . . . . for now. . .</h6>
                         <div id="maps-frame">
-                            <div class="mapouter">
+                            <div class="mapouter" id="outermap">
                                 <div id="gmap_canvas">
-{#                                    <iframe id="gmap_canvas"#}
-{#                                            src="https://maps.google.com/maps?q=paris&t=&z=13&ie=UTF8&iwloc=&output=embed"#}
-{#                                            frameborder="0"#}
-{#                                            scrolling="no"#}
-{#                                            marginheight="0"#}
-{#                                            marginwidth="0">#}
-{#                                    </iframe>#}
 
                                 </div>
                             </div>
                         </div>
                         <a href="{{ route }}" class="card-link" target="{{ target }}">Your route</a><a> Lat: </a><a id="lat">--</a><a>, Long: </a><a id="long">--</a>
+                        <div id="dlist">
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -151,6 +147,9 @@
                 $('#dest_zip').removeAttr('required');
                 $('#dests').attr('required', true);
             }
+
+            // resize the scroll bar
+            $('body').getNiceScroll().resize();
         }
     </script>
     <script>
@@ -160,6 +159,9 @@
         const canvas = document.getElementById("gmap_canvas");
 
         var route_resp;
+        var dlist = document.getElementById('dlist');
+
+        dlist.addEventListener('make_list', build_list);
 
         // initializes map
         function initMap() {
@@ -211,6 +213,32 @@
                 });
             });
         }
+        function build_list(evt){
+            // remove old lists
+            dlist.removeChild(dlist.childNodes[0]);
+            // add header
+            var head = document.createElement('h5');
+            head.innerText = 'Destination List';
+            head.style.paddingTop = '20px';
+            head.style.paddingBottom = '20px';
+            dlist.appendChild(head);
+            //
+            var theList = document.createElement('ul');
+            theList.className = "list-group list-group-flush grey-background";
+
+            for(var i = 0; i < evt.detail.length; i++){
+                var li = document.createElement('li');
+                li.className = "list-group-item grey-background";
+                li.innerText = evt.detail[i];
+                theList.appendChild(li);
+            }
+
+            dlist.appendChild(theList);
+
+            // resize the scroll bar
+            $('body').getNiceScroll().resize();
+
+        }
         // function to decide which coordinates to use for center of map
         function buildCoords(name){
             var lat;
@@ -235,6 +263,20 @@
             }
             return {zoom: zoom, center: {lat: lat, lng: lng}}
         }
+
+        $(window).resize(function() {
+            // resize map so it's not overflowing the card
+            var w = $('#map-card').width();
+            var map = $('#outermap');
+            // greater than 625 means no overflow, (leave as is | grow back to 600px)
+            if (w >= 625){
+                map.css('width', '600px');
+            }
+            // map is overflowing, make 25px smaller than card width
+            else {
+                map.css('width', (w - 25) + 'px');
+            }
+        });
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key={{maps_key}}&callback=initMap"></script>
 

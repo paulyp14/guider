@@ -1,0 +1,8 @@
+            Load     X
+                                                            Add       Y
+                                                            Store     Z
+                                                            Halt
+                                                X,        Dec       4
+                                                Y,        Dec       8
+                                                Z,         Dec       0
+                                                            END

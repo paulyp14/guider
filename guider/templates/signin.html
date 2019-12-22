@@ -1,7 +1,7 @@
 {% extends "main.html" %}
 
 {% block main_content %}
-    <div class="container-fluid" style="display:flex; justify-content: center; align-items: center; height: 100vh;">
+    <div class="container-fluid" id="signin-container-fluid">
         <!-- Default form login -->
         <form class="grey-background text-center border border-light p-5" action="{{ url_for('sign_in') }}" method="post">
             {{ form.csrf_token }}

@@ -1,17 +1,24 @@
-from flask import request, jsonify, flash, get_flashed_messages
-from flask import render_template, redirect, url_for
 import time
+import bcrypt
+from flask import render_template, redirect, url_for, session
+from flask import request, jsonify, flash, get_flashed_messages
+from flask_login import LoginManager, login_user, logout_user, login_required
+
 
 from python_src import forms
-from python_src.guider_flask import GuiderFlask
-from python_src.mapper import DirectionBuilder
 from python_src.db_utils.utilities import *
-
+from python_src.guider_user import GuiderUser
+from python_src.mapper import DirectionBuilder
 from python_src.msim.marie_parser import Parser
+from python_src.guider_flask import GuiderFlask
 
 
 app = GuiderFlask(__name__)
 app.secret_key = 'allo'
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'sign_in'
+app.config['USE_SESSION_FOR_NEXT'] = True
 
 
 @app.route('/')
@@ -109,6 +116,7 @@ def display_marie():
                            rendered_code=app.marie_parser.render_html(),
                            rendered_lines=app.marie_parser.html_line_numbers())
 
+
 @app.route('/about_us')
 def about_us():
     """
@@ -131,28 +139,77 @@ def sign_up():
     if signup_form.validate_on_submit():
         # transform and insert the data
         signup_form.transform()
-        signup_form.insert()
-        return redirect(url_for('sign_up'))
-    if request.method == 'POST':
-        print(signup_form)
-        e = [(flash(li), print(li)) for lst in signup_form._fields.values() for li in lst.errors]
-        [print(e2) for e2 in get_flashed_messages()]
-
+        # try to insert and get result
+        res = signup_form.insert()
+        if res is None:
+            # if successful redirect
+            return redirect(url_for('sign_in'))
+        # unsuccessful, let user know the password is already taken
+        signup_form.set_empty_string()
+        signup_form.email.data = res
 
     return render_template('sign_up.html', form=signup_form)
 
 
 @app.route('/sign_in', methods=['GET', 'POST'])
 def sign_in():
+    """
+    Route to handle signing in
+    """
     signin_form = forms.SignInForm()
 
+    # clear initial form data
     if request.method == 'GET':
         signin_form.set_empty_string()
-    print(signin_form)
+    # validate the form
     if signin_form.validate_on_submit():
-        return redirect(url_for('cities'))
+        # if validated, a user exists, and the password was correct
+        user = find_user(signin_form.get_user())
+        login_user(user)
+        # set the next page
+        next_page = session.get('next', '/cities')
+        # go to the next page
+        return redirect(next_page)
 
     return render_template('signin.html', form=signin_form)
+
+
+@app.route('/about_us/supporters')
+def supporters():
+    return render_template('supporters.html')
+
+
+@app.route('/get_supporter_table_contents', methods=['GET'])
+def supporter_table_contents():
+    time.sleep(5)
+    entries = get_all_users()
+
+    return jsonify(entries)
+
+
+def find_user(user_email):
+    """
+    Function to find a user
+    :param user_email: the email to get user info for
+    :return: a GuiderUser object with that email
+    """
+    return GuiderUser(*get_matching_user(user_email))
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    """
+    The required login_manager decorator
+    """
+    user = find_user(user_id)
+    return user
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('sign_in'))
 
 
 if __name__ == '__main__':

@@ -12,6 +12,13 @@ class Parser:
     ]
 
     def __init__(self, program=None):
+        """
+
+        A class for parsing MARIE Simulator instructions
+
+        :param program: the program to parse
+
+        """
         self.variables = {}
         self.instructions = {}
         self.lines = None
@@ -89,6 +96,18 @@ class Line:
     _numbers = '0x0'
 
     def __init__(self, line, func=None, variable=None, operand=None, comments=None, operand_is_var=None):
+        """
+
+        A helper class that parses a line of MARIE code
+
+        :param line:
+        :param func:
+        :param variable:
+        :param operand:
+        :param comments:
+        :param operand_is_var:
+
+        """
         self.func = func
         self.line = line
         self.variable = variable
@@ -148,6 +167,13 @@ class Line:
 class Variable:
 
     def __init__(self, name):
+        """
+
+        A helper class that stores a MARIE variable
+
+        :param name:
+
+        """
         self.name = name
         self.color = None
 

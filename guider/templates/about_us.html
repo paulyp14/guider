@@ -2,12 +2,27 @@
 {% block main_content %}
     <div id="proposal">
         <div class="grey-background padding-5px">
+            <h1>More Info</h1>
+            <br>
+            <br>
+            <p>
+                <a href="{{ url_for('supporters') }}">Our users and supporters</a>
+            </p>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="grey-background padding-5px">
             <h1>Other projects</h1>
             <br>
             <br>
             <h4>Comp 228</h4>
-            <a href="{{ url_for('marie_form') }}">Beautify code for the MARIE simulator</a>
-
+            <p>
+                <a href="{{ url_for('marie_form') }}">Beautify code for the MARIE simulator</a>
+            </p>
+            <p>
+                <a href="">Circuitry and Bit Conversion</a>
+            </p>
         </div>
     </div>
 {% endblock %}

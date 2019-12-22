@@ -1,12 +1,69 @@
-1. submit sign up -- DONE_ISH
-2. login abilities
-3. load info about users -- table shows name, email, role --- click on name - shows route search history!!!
+CHECKLIST
+
+1. DONE --- Start by modifying your templates to use template inheritance. Break your base template into blocks, then make your other
+   templates extend it, and redefine some blocks to hold the contents specific to the page.
+
+2. DONE --- Create a Flask application, preferably using PyCharm. Use a virtual environment containing only what is necessary for your
+   web site. It should only contain the packages you need for your website. You can reuse a virtual environment you used to run
+   examples or for the tutorials. Don't use an environment containing packages you used for other courses (such as AI for example).
+
+3. DONE --- Create routes and their associated functions to serve your templates. Your templates should be located in the templates subfolder,
+   and all your static contents (images, css files, ...) should be under the static folder. Make sure your app can render your
+   templates, and that the static files are being loaded correctly in your pages.
+
+4. DONE --- All your forms should be defined as subclasses of FlaskForm, and should have properly defined validators. Your forms should be handled
+   properly, by defining a route accepting GET and POST methods, and you should use the POST/REDIRECT/GET pattern when the form data
+   validates (as shown in class).
+
+5. DONE (WITH DB) --- The data to be dynamically inserted in your templates should be stored in CSV files, located in the data subfolder. Alternatively,
+   you can store your data in an SQLite DB, also stored in the data subfolder, or in some other DB. Storing data in a database is optional.
+
+6. Your web site should contain:
+   A. DONE (4 forms, 2 i made - 1 significantly different, 2 adapted from internet) --- At least 2 forms, with at least one of these forms which
+      must be significantly different from the ones included in the examples covered in class and in the tutorials.
+
+   B. DONE (1 list, 1 table) --- At least 1 table and at least 1 list created dynamically from data stored in a local CSV file or a local
+      SQLite DB (or some other DB). These pages can be, or not, directly connected to your forms.
+
+   C. DONE (Logout is protected route) --- A way to support user logins. Note that logging in can be limited to administrators, thus there's no need to have a registration
+      page (but you can have a registration page if you wish). Make sure you provide a valid username/password pair to allow using your web
+      site if you don't have a registration page and/or if some features are limited to already created users (such as admins). Some pages
+      should be protected and viewable by only the logged in users. There should be a way, in each page, to figure out if a user is
+      logged in or not. You could have a special div in your base template that displays whether a user is logged in or not.
+
+   D. At least 1 of the following features:
+        NO --- JavaScript input or form validation, using regular expressions where appropriate, on at least 2 forms.
+
+        DONE --- JavaScript Ajax call(s) to dynamically load data from the server, and the server code to support it.
+
+        DONE --- Using a database instead of CSV files to store data.
+
+        NO --- A Forgot password page to help reset a user's lost password.
+
+        NO --- A search page (or possibly a div in a block shared among your templates) to search for something interesting on your
+            site (for example, search for some blog posts).
+
+        DONE (Code rendering, spinning wheel, maps rendering) --- Some other advanced feature, going beyond the basic examples
+            presented in class and in the tutorials.
+
+-----------------------------
+=============================
+-----------------------------
+
+TO DO
+
+
+1. submit sign up -- DONE
+2. login abilities -- DONE
+3. load info about users -- table shows name, email, role (!!! DONE !!!) --- click on name - shows route search history!!!
+   B - if list of routes isn't possible, could just create list of waypoints after loading the routes on cities page -- THIS IS DONE
 4. beautify about us
-5.
 
 ISSUES
-resizing navbar, iframe, with window resize events!
-white circles not properly loaded always
+resizing navbar, iframe, with window resize events! --- DONE!!!!!
+white circles not properly loaded always --- GONE
 
 COULD CHANGE THE STORE OF ROUTES, THE STORE OF MARIE CODE TO BE DONE IN DB
+5. CHANGE BEHAVIOUR OF CITY SO THAT USING TRAVELMODE=TRANSIT
+
 
